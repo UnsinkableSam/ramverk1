@@ -1,8 +1,8 @@
 language: php
 
 php:
-  - "7.3"
-  - hhvm
+  - "7.2"
+  - hhvm # on Trusty only
   - nightly
 
 matrix:
