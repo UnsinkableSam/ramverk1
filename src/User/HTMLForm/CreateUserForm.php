@@ -24,7 +24,7 @@ class CreateUserForm extends FormModel
               "legend" => "Create user",
           ],
           [
-              "acronym" => [
+              "email" => [
                   "type"        => "text",
               ],
 
@@ -44,6 +44,7 @@ class CreateUserForm extends FormModel
                   "value" => "Create user",
                   "callback" => [$this, "callbackSubmit"]
               ],
+
           ]
         );
     }
@@ -59,7 +60,7 @@ class CreateUserForm extends FormModel
     public function callbackSubmit()
     {
         // Get values from the submitted form
-        $acronym       = $this->form->value("acronym");
+        $email       = $this->form->value("email");
         $password      = $this->form->value("password");
         $passwordAgain = $this->form->value("password-again");
 
@@ -79,7 +80,11 @@ class CreateUserForm extends FormModel
         //    ->fetch();
         $user = new User();
         $user->setDb($this->di->get("dbqb"));
-        $user->acronym = $acronym;
+        if ($user->hasMail($email)) {
+          $this->form->addOutput("Email already registered");
+          return false;
+        }
+        $user->email = $email;
         $user->setPassword($password);
         $user->save();
 

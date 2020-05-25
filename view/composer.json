@@ -1,0 +1,39 @@
+{
+  "name": "samax/stackoverflow-mod",
+  "type": "library",
+  "description": "stackoverflow clone in anax",
+  "keywords": [
+    "anax",
+    "stackoverflow"
+  ],
+  "homepage": "https://github.com/UnsinkableSam/stackoverflowMod",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Sam Pettersson",
+      "email": "Sampettersson.work.eu@gmail.com",
+      "homepage": "https://github.com/UnsinkableSam",
+      "role": "DevOps / Developer"
+    }
+  ],
+  "support": {
+    "issues": "https://github.com/UnsinkableSam/stackoverflowMod/issues"
+  },
+  "autoload": {
+    "psr-4": {
+      "Anax\\": "src/"
+    }
+  },
+  "minimum-stability": "beta",
+  "prefer-stable": true,
+  "require": {
+    "php": ">=7.2",
+    "anax/commons": "^2.0.0@beta"
+  },
+  "require-dev": {
+    "phpmetrics/phpmetrics": "^2",
+    "phpunit/phpunit": "^7",
+    "anax/anax-lite": "^1.0.24",
+    "anax/htmlform": "^2.0.0"
+  }
+}

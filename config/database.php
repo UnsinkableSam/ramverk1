@@ -14,8 +14,8 @@
  */
 return [
     "dsn"              => "sqlite:" . ANAX_INSTALL_PATH . "/data/db.sqlite",
-    "username"         => null,
-    "password"         => null,
+    "username"         => 'user',
+    "password"         => "pass",
     "driver_options"   => null,
     "fetch_mode"       => \PDO::FETCH_OBJ,
     "table_prefix"     => null,
