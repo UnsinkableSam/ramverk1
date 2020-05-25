@@ -99,32 +99,32 @@ class Questions extends ActiveRecordModel
 
     public function indexUser($username = null, $di)
     {
-      $QuestionListArray = [];
-      $QuestionClass = new Questions();
-      $QuestionClass->setDb($di->get("dbqb"));
-      $Questions = [];
-      $resAr = [];
+      $questionListArray = [];
+      $questionClass = new Questions();
+      $questionClass->setDb($di->get("dbqb"));
+      $questions = [];
+
 
       $this->setDb($di->get("dbqb"));
-      $QuestionListArray = $this->findAllWhere("author = ?", [$username]);
+      $questionListArray = $this->findAllWhere("author = ?", [$username]);
       
-      return $QuestionListArray;
+      return $questionListArray;
 
     }
 
 
     public function indexUserComments($username = null, $di)
     {
-      $CommentListArray = [];
-      $CommentClass = new Comments();
-      $CommentClass->setDb($di->get("dbqb"));
-      $Comments = [];
-      $resAr = [];
+      $commentListArray = [];
+      $commentClass = new Comments();
+      $commentClass->setDb($di->get("dbqb"));
+      $comments = [];
+
 
       $this->setDb($di->get("dbqb"));
-      $CommentListArray = $CommentClass->findAllWhere("author = ?", [$username]);
+      $commentListArray = $commentClass->findAllWhere("author = ?", [$username]);
       
-      return $CommentListArray;
+      return $commentListArray;
 
     }
 

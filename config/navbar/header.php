@@ -50,12 +50,6 @@ return [
         ],
 
 
-        [
-            "text" => "VoteApi",
-            "url" => "VoteApi",
-            "title" => "VoteApi",
-        ],
-
        
     ],
 ];

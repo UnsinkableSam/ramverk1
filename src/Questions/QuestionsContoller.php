@@ -38,7 +38,6 @@ class QuestionsContoller implements ContainerInjectableInterface
   public function indexActionGet()
   {
       // Get the current route and see if it matches a content/file
-      $path = $this->di->get("request")->getRoute();
       
 
     //   $file1 = ANAX_INSTALL_PATH . "/content/{$path}.md";
@@ -89,7 +88,7 @@ class QuestionsContoller implements ContainerInjectableInterface
 
   public function omAction() {
             // Get the current route and see if it matches a content/file
-            $path = $this->di->get("request")->getRoute();
+       
       
 
             //   $file1 = ANAX_INSTALL_PATH . "/content/{$path}.md";
