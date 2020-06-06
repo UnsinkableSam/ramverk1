@@ -3,9 +3,7 @@
 namespace Anax\Controller;
 
 use Anax\Commons\ContainerInjectableInterface;
-
 use Anax\Commons\ContainerInjectableTrait;
-
 use Anax\Route\Exception\NotFoundException;
 
 /**
@@ -14,8 +12,6 @@ use Anax\Route\Exception\NotFoundException;
 class ErrorHandlerController implements ContainerInjectableInterface
 {
     use ContainerInjectableTrait;
-
-
 
     /**
      * Add internal routes for 403, 404 and 500 that provides a page with
@@ -27,21 +23,21 @@ class ErrorHandlerController implements ContainerInjectableInterface
 
      * @return object as the response.
      */
-    public function catchAll() : object
+    public function catchAll(): object
     {
         $title = " | Anax";
         $pages = [
             "403" => [
                 "Anax 403: Forbidden",
-                "You are not permitted to do this."
+                "You are not permitted to do this.",
             ],
             "404" => [
                 "Anax 404: Not Found",
-                "The page you are looking for is not here."
+                "The page you are looking for is not here.",
             ],
             "500" => [
                 "Anax 500: Internal Server Error",
-                "An unexpected condition was encountered."
+                "An unexpected condition was encountered.",
             ],
         ];
 
@@ -60,7 +56,7 @@ class ErrorHandlerController implements ContainerInjectableInterface
         );
 
         return $page->render([
-            "title" => $pages[$path][0] . $title
+            "title" => $pages[$path][0] . $title,
         ], $path);
     }
 }

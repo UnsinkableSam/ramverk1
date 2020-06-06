@@ -14,8 +14,6 @@ class Answer extends ActiveRecordModel
      */
     protected $tableName = "Answers";
 
-
-
     /**
      * Columns in the table.
      *
@@ -26,8 +24,7 @@ class Answer extends ActiveRecordModel
     public $text;
     public $points;
 
-
-    public function userInfo($id = null, $di)
+    public function userInfo($id = null, $di = null)
     {
 
         $this->setDb($di->get("dbqb"));
@@ -35,25 +32,23 @@ class Answer extends ActiveRecordModel
         return $res;
     }
 
-
-    public function questionAnswers($id = null, $di)
+    public function questionAnswers($id = null, $di = null)
     {
-        
+
         $this->setDb($di->get("dbqb"));
         $res = $this->findAllWhere("questionID = ?", $id);
 
         return $res;
     }
 
-
-    public function comments($id = null, $di)
+    public function comments($id = null, $di = null)
     {
         $comments = new Comments();
         $res = $comments->answerComments($id, $di);
         return $res;
     }
 
-    public function userAnswers($username = null, $di)
+    public function userAnswers($username = null, $di = null)
     {
 
         $this->setDb($di->get("dbqb"));
@@ -61,6 +56,4 @@ class Answer extends ActiveRecordModel
 
         return $res;
     }
-
-
 }

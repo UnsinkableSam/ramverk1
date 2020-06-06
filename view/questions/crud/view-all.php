@@ -1,5 +1,6 @@
 <?php
 namespace Anax\View;
+
 // print_r($items);
 /**
  * View to display all books.
@@ -27,8 +28,8 @@ $urlToDelete = url("delete");
 
 <?php if (!$items) : ?>
 <p>There are no items to show.</p>
-<?php
-    return;
+    <?php
+        return;
 endif;
 ?>
 

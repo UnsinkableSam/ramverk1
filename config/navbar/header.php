@@ -35,7 +35,6 @@ return [
             "url" => "user/user",
             "title" => "User page",
         ],
-       
 
         [
             "text" => "Questions",
@@ -49,7 +48,11 @@ return [
             "title" => "tags",
         ],
 
+        [
+            "text" => "logout",
+            "url" => "user/logout",
+            "title" => "logout",
+        ],
 
-       
     ],
 ];

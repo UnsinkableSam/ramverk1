@@ -14,8 +14,6 @@ class Comments extends ActiveRecordModel
      */
     protected $tableName = "comments";
 
-
-
     /**
      * Columns in the table.
      *
@@ -26,8 +24,7 @@ class Comments extends ActiveRecordModel
     public $comment;
     public $points;
 
-
-    public function userInfo($id = null, $di)
+    public function userInfo($di = null)
     {
 
         $this->setDb($di->get("dbqb"));
@@ -39,8 +36,7 @@ class Comments extends ActiveRecordModel
         return $res;
     }
 
-
-    public function points($id = null, $di)
+    public function points($id = null, $di = null)
     {
 
         $this->setDb($di->get("dbqb"));
@@ -52,9 +48,7 @@ class Comments extends ActiveRecordModel
         return $res;
     }
 
-
-
-    public function questionComments($id = null, $di)
+    public function questionComments($id = null, $di = null)
     {
 
         $this->setDb($di->get("dbqb"));
@@ -66,7 +60,7 @@ class Comments extends ActiveRecordModel
         return $res;
     }
 
-    public function answerComments($id = null, $di)
+    public function answerComments($di = null)
     {
 
         $this->setDb($di->get("dbqb"));
@@ -78,9 +72,7 @@ class Comments extends ActiveRecordModel
         return $res;
     }
 
-
-
-    public function userComments($username = null, $di)
+    public function userComments($username = null, $di = null)
     {
 
         $this->setDb($di->get("dbqb"));
@@ -91,8 +83,4 @@ class Comments extends ActiveRecordModel
         // }
         return $res;
     }
-
-
-
-
 }

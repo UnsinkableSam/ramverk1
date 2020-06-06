@@ -3,7 +3,6 @@
 namespace Anax\Controller;
 
 use Anax\Commons\ContainerInjectableInterface;
-
 use Anax\Commons\ContainerInjectableTrait;
 
 /**
@@ -12,8 +11,6 @@ use Anax\Commons\ContainerInjectableTrait;
 class FlatFileContentController implements ContainerInjectableInterface
 {
     use ContainerInjectableTrait;
-
-
 
     /**
      * Render a page using flat file content.

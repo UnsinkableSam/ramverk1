@@ -44,7 +44,6 @@ class UserLoginForm extends FormModel
                     "callback" => [$this, "callbackSubmit"]
                 ],
             ]
-
         );
     }
 
@@ -56,26 +55,23 @@ class UserLoginForm extends FormModel
    *
    * @return boolean true if okey, false if something went wrong.
    */
-  public function callbackSubmit()
-  {
+    public function callbackSubmit()
+    {
 
-      $email       = $this->form->value("user");
-      $password      = $this->form->value("password");
+        $email       = $this->form->value("user");
+        $password      = $this->form->value("password");
 
-      $user = new User();
-      $user->setDb($this->di->get("dbqb"));
+        $user = new User();
+        $user->setDb($this->di->get("dbqb"));
 
-      $res = $user->verifyPassword($email, $password);
-      if (!$res) {
-         $this->form->rememberValues();
-         $this->form->addOutput("User or password did not match.");
-         return false;
-      }
-      $this->di->session->set("loggedin", $user->email);
-      $this->form->addOutput("User " . $user->email . " logged in.");
-      return true;
-  }
-
-
-
+        $res = $user->verifyPassword($email, $password);
+        if (!$res) {
+            $this->form->rememberValues();
+            $this->form->addOutput("User or password did not match.");
+            return false;
+        }
+        $this->di->session->set("loggedin", $user->email);
+        $this->form->addOutput("User " . $user->email . " logged in.");
+        return true;
+    }
 }

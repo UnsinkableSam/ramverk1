@@ -1,13 +1,14 @@
 <?php
-
 namespace Anax\View;
+
 use \Anax\TextFilter\TextFilter;
+
 /**
  * Render content within an article.
  */
 // print_r($tags[0]);
 
-for ($i=0; $i < count($tags); $i++) { 
+for ($i=0; $i < count($tags); $i++) {
     $tagsArr[$i] = $tags[$i]->tags;
 }
 
@@ -41,37 +42,36 @@ if (isset($class)) {
 <h1>Latest questions</h1>
 <?php if (!$questions) : ?>
 <p>There are no ques$questions to show.</p>
-<?php
+    <?php
     return;
 endif;
 ?>
 
-<table>
-    <tr>
-        <th>Id</th>
-        <th>Title</th>
-        <th>Author</th>
-        <th>Tags</th>
-    </tr>
-    <?php foreach ($questions as $key => $item) : ?>
-    <!-- <p> <?= print_r($item) ?> </p> -->
-    <tr>
-        <td>
-            <a href="<?= url("update/{$item->id}"); ?>"><?= $item->id ?></a>
-        </td>
-        <td><a href="<?= url("question/{$item->id}"); ?>"> <?= $item->title ?> </a></td>
-        <td><?= $item->author ?></td>
-        <td><?= $item->tags ?></td>
+    <table>
+        <tr>
+            <th>Id</th>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Tags</th>
+        </tr>
+        <?php foreach ($questions as $key => $item) : ?>
+        <!-- <p> <?= print_r($item) ?> </p> -->
+        <tr>
+            <td>
+                <a href="<?= url("update/{$item->id}"); ?>"><?= $item->id ?></a>
+            </td>
+            <td><a href="<?= url("question/{$item->id}"); ?>"> <?= $item->title ?> </a></td>
+            <td><?= $item->author ?></td>
+            <td><?= $item->tags ?></td>
 
-    </tr>
-    
-    <?php
-    if ($key == 4) {
-        break;
-    }
-
-    endforeach; ?>
-</table>
+        </tr>
+        
+            <?php
+            if ($key == 4) {
+                break;
+            }
+        endforeach; ?>
+    </table>
 
 <?php
 $filter = new TextFilter();
@@ -79,24 +79,14 @@ $filters = ["markdown"];
 echo "<h3> Most popular tags</h3>";
 ?>
 
-    <?php 
-
+        <?php
        
-foreach ($popular as $key => $value) {
+        foreach ($popular as $key => $value) {
+            $tagsFiltered = $filter->parse($value, $filters);
+            preg_replace("/\r|\n/", "", $tagsFiltered->text);
+            $url = url("tags/$value"); ?>
 
-
-  $tagsFiltered = $filter->parse($value, $filters);
-  preg_replace( "/\r|\n/", "", $tagsFiltered->text );
-  $url = url("tags/$value");
-  ?>
-
-  
-        <?php echo "<a href='$url'>" . $value . "</a>";  ?>
-
-
-
-    <?php
-  
-}
-
-?>
+        
+                <?php echo "<a href='$url'>" . $value . "</a>"; ?>
+            <?php
+        }

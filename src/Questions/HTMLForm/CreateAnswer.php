@@ -3,10 +3,8 @@
 namespace Anax\Questions\HTMLForm;
 
 use Anax\HTMLForm\FormModel;
-use Psr\Container\ContainerInterface;
 use Anax\Questions\Answer;
-use Anax\Questions\Comments;
-use Anax\Questions\HTMLForm\CreateComment;
+use Psr\Container\ContainerInterface;
 
 /**
  * Form to create an item.
@@ -23,6 +21,7 @@ class CreateAnswer extends FormModel
     {
         parent::__construct($di);
         $userName = $this->di->session->get("loggedin");
+        $answerId = $this->di->session->get("answerId");
         $this->questionId = $id;
         $this->form->create(
             [
@@ -30,7 +29,6 @@ class CreateAnswer extends FormModel
                 "legend" => "Answer",
             ],
             [
-
 
                 "questionID" => [
                     "type" => "hidden",
@@ -52,17 +50,11 @@ class CreateAnswer extends FormModel
                 "submit" => [
                     "type" => "submit",
                     "value" => "Answer",
-                    "callback" => [$this, "callbackSubmit"]
+                    "callback" => [$this, "callbackSubmit"],
                 ],
             ]
         );
-
-
-
-
     }
-
-
 
     /**
      * Callback for submit-button which should return true if it could
@@ -70,11 +62,11 @@ class CreateAnswer extends FormModel
      *
      * @return bool true if okey, false if something went wrong.
      */
-    public function callbackSubmit() : bool
+    public function callbackSubmit(): bool
     {
 
         $answer = new Answer();
-        $this->di->session->set("answerId", $this->form->value("id"));
+        $this->di->session->set("answerId", $answer->id);
         $answer->setDb($this->di->get("dbqb"));
         $answer->author = $this->form->value("author");
         $answer->text = $this->form->value("answer");
@@ -84,8 +76,6 @@ class CreateAnswer extends FormModel
         $this->form->addOutput("Answer.");
         return true;
     }
-
-
 
     /**
      * Callback what to do if the form was successfully submitted, this
@@ -97,8 +87,6 @@ class CreateAnswer extends FormModel
         $this->di->get("response")->redirect("question/" . $this->questionId)->send();
         $this->form->addOutput("Answer.");
     }
-
-
 
     // /**
     //  * Callback what to do if the form was unsuccessfully submitted, this

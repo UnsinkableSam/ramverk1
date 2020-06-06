@@ -3,10 +3,11 @@
 namespace Anax\Questions;
 
 use Anax\DatabaseActiveRecord\ActiveRecordModel;
-use Anax\Questions\Comments;
 use Anax\Questions\Answer;
-use Anax\Questions\Tags;
+use Anax\Questions\Comments;
 use Anax\Questions\HTMLForm\CreateComment;
+use Anax\Questions\Tags;
+
 /**
  * A database driven model using the Active Record design pattern.
  */
@@ -16,8 +17,6 @@ class Questions extends ActiveRecordModel
      * @var string $tableName name of the database table.
      */
     protected $tableName = "questions";
-
-
 
     /**
      * Columns in the table.
@@ -30,33 +29,29 @@ class Questions extends ActiveRecordModel
     public $text;
     public $points;
 
-
-
-    public function indexFind($tag = null, $di)
+    public function indexFind($tag = null, $di = null)
     {
-      $tagListArray = [];
-      $tagsClass = new Tags();
-      $tagsClass->setDb($di->get("dbqb"));
-      $tags = [];
-      $resAr = [];
-      $this->setDb($di->get("dbqb"));
-      // $res = $this->findAllWhere("tags = ?", ["java"]);
-      if ($tag !== null) {
-        // $tagListArray = $tagsClass->findAllWhere("tags = ?", [$tag]);
-        $tagListArray = $this->findAllWhere("tags LIKE ?", [ "%" . $tag . "%" ]);
-      } else {
-        // $tagListArray = $tagsClass->findAll();
-        $tagListArray = $this->findAll();
-      }
+        $tagListArray = [];
+        $tagsClass = new Tags();
+        $tagsClass->setDb($di->get("dbqb"));
+        $this->setDb($di->get("dbqb"));
+        // $res = $this->findAllWhere("tags = ?", ["java"]);
+        if ($tag !== null) {
+            // $tagListArray = $tagsClass->findAllWhere("tags = ?", [$tag]);
+            $tagListArray = $this->findAllWhere("tags LIKE ?", ["%" . $tag . "%"]);
+        } else {
+            // $tagListArray = $tagsClass->findAll();
+            $tagListArray = $this->findAll();
+        }
 
-      // foreach ($tagListArray as $value) {
-      //   $value->threadId;
-      // }
-      $res = $this->findAll();
-      return $tagListArray;
+        // foreach ($tagListArray as $value) {
+        //   $value->threadId;
+        // }
+        // $res = $this->findAll();
+        return $tagListArray;
     }
 
-    public function userInfo($id = null, $di)
+    public function userInfo($id = null, $di = null)
     {
 
         $this->setDb($di->get("dbqb"));
@@ -64,70 +59,54 @@ class Questions extends ActiveRecordModel
         return $res;
     }
 
-
-
-    public function comments($id = null, $di)
+    public function comments($id = null, $di = null)
     {
         $comments = new Comments();
         $res = $comments->questionComments($id, $di);
         return $res;
     }
 
-
-
-
-    public function answers($id = null, $di)
+    public function answers($id = null, $di = null)
     {
         $comments = new Answer();
         $res = $comments->questionAnswers($id, $di);
         return $res;
     }
 
-
     public function answersForms($answers, $di, $id)
     {
         $res = [];
         foreach ($answers as $value) {
-          $commentForm = new CreateComment($di, $id, $value->id);
-          array_push($res, $commentForm->getHTML());
+            $commentForm = new CreateComment($di, $id, $value->id);
+            array_push($res, $commentForm->getHTML());
         }
-
 
         return $res;
     }
 
-
-    public function indexUser($username = null, $di)
+    public function indexUser($username = null, $di = null)
     {
-      $questionListArray = [];
-      $questionClass = new Questions();
-      $questionClass->setDb($di->get("dbqb"));
-      $questions = [];
+        $questionListArray = [];
+        $questionClass = new Questions();
+        $questionClass->setDb($di->get("dbqb"));
+        // $questions = [];
 
+        $this->setDb($di->get("dbqb"));
+        $questionListArray = $this->findAllWhere("author = ?", [$username]);
 
-      $this->setDb($di->get("dbqb"));
-      $questionListArray = $this->findAllWhere("author = ?", [$username]);
-      
-      return $questionListArray;
-
+        return $questionListArray;
     }
 
-
-    public function indexUserComments($username = null, $di)
+    public function indexUserComments($username = null, $di = null)
     {
-      $commentListArray = [];
-      $commentClass = new Comments();
-      $commentClass->setDb($di->get("dbqb"));
-      $comments = [];
+        $commentListArray = [];
+        $commentClass = new Comments();
+        $commentClass->setDb($di->get("dbqb"));
+        // $comments = [];
 
+        $this->setDb($di->get("dbqb"));
+        $commentListArray = $commentClass->findAllWhere("author = ?", [$username]);
 
-      $this->setDb($di->get("dbqb"));
-      $commentListArray = $commentClass->findAllWhere("author = ?", [$username]);
-      
-      return $commentListArray;
-
+        return $commentListArray;
     }
-
-
-
 }

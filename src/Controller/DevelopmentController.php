@@ -3,9 +3,7 @@
 namespace Anax\Controller;
 
 use Anax\Commons\ContainerInjectableInterface;
-
 use Anax\Commons\ContainerInjectableTrait;
-
 use Anax\Route\Exception\NotFoundException;
 
 /**
@@ -14,8 +12,6 @@ use Anax\Route\Exception\NotFoundException;
 class DevelopmentController implements ContainerInjectableInterface
 {
     use ContainerInjectableTrait;
-
-
 
     /**
      * Render views that are supported.
@@ -28,7 +24,7 @@ class DevelopmentController implements ContainerInjectableInterface
      *
      * @SuppressWarnings(PHPMD.UnusedFormalParameter)
      */
-    public function catchAll(...$args) : object
+    public function catchAll(...$args): object
     {
         $pages = [
             "" => "index",
@@ -51,13 +47,13 @@ class DevelopmentController implements ContainerInjectableInterface
         $page->add(
             "anax/v2/dev/{$pages[$path]}",
             [
-                "mount" => "dev/"
+                "mount" => "dev/",
             ]
         );
 
         return $page->render([
             "title" => ucfirst($pages[$path]),
-            "baseTitle" => " | Anax development utilities"
+            "baseTitle" => " | Anax development utilities",
         ]);
     }
 }

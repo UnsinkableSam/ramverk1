@@ -2,7 +2,6 @@
 namespace Anax\Controller;
 
 use Anax\Commons\ContainerInjectableInterface;
-
 use Anax\Commons\ContainerInjectableTrait;
 
 // use Anax\Route\Exception\ForbiddenException;
@@ -21,62 +20,55 @@ class ApiExternalController implements ContainerInjectableInterface
 
     use ContainerInjectableTrait;
 
-
-
     /**
      * @var string $db a sample member variable that gets initialised
      */
     // private $db = "not active";
 
-
-
-        /**
-         * This is the index method action, it handles:
-         * ANY METHOD mountpoint
-         * ANY METHOD mountpoint/
-         * ANY METHOD mountpoint/index
-         *
-         * @return string
-         */
-    public function indexAction() : object
+    /**
+     * This is the index method action, it handles:
+     * ANY METHOD mountpoint
+     * ANY METHOD mountpoint/
+     * ANY METHOD mountpoint/index
+     *
+     * @return string
+     */
+    public function indexAction(): object
     {
-          $title = " | Ip Json API";
-          $page = $this->di->get("page");
-          $page->add(
-              "anax/v2/ip-validator/apiExternal",
-              [
-                  "header" => "hello",
-                  "text" => "text",
-              ]
-          );
+        $title = " | Ip Json API";
+        $page = $this->di->get("page");
+        $page->add(
+            "anax/v2/ip-validator/apiExternal",
+            [
+                "header" => "hello",
+                "text" => "text",
+            ]
+        );
 
-
-          return $page->render([
-              "title" => "$title"
-          ]);
+        return $page->render([
+            "title" => "$title",
+        ]);
     }
 
-
-    public function externalInfoAction() : object
+    public function externalInfoAction(): object
     {
 
         $title = " | Ip info";
         $page = $this->di->get("page");
         $page->add("anax/v2/ip-validator/externalInfo", [
-          "ip" => $this->di->get("request")->getGet("ip"),
-          "type" => $this->di->get("request")->getGet("type"),
-          "country" => $this->di->get("request")->getGet("country"),
-          "latitude" => $this->di->get("request")->getGet("latitude"),
-          "longitude" => $this->di->get("request")->getGet("longitude")
+            "ip" => $this->di->get("request")->getGet("ip"),
+            "type" => $this->di->get("request")->getGet("type"),
+            "country" => $this->di->get("request")->getGet("country"),
+            "latitude" => $this->di->get("request")->getGet("latitude"),
+            "longitude" => $this->di->get("request")->getGet("longitude"),
         ]);
 
-
         return $page->render([
-          "title" => "$title"
+            "title" => "$title",
         ]);
     }
 
-    public function validateipActionGet($ipAdress = null) : void
+    public function validateipActionGet($ipAdress = null): void
     {
         $keykey = $this->di->get("apikey");
 
@@ -87,15 +79,13 @@ class ApiExternalController implements ContainerInjectableInterface
         //     $ipInfo["IP"] = $ipAdress;
         // }
         $ipInfo["IP"] = $this->di->get("request")->getGet("ip") ?? $ipAdress;
-        $apiEx =  $this->di->get("ExternalApi");
+        $apiEx = $this->di->get("ExternalApi");
         $res = $apiEx->validateipActionGet($ipInfo["IP"], $keykey);
         $obj = $res;
         $obj = json_decode($res);
 
-
-
         $this->di->get("response")->redirect("apiExternal/externalInfo/?ip=" . $obj->ip
-        . "&type=" . $obj->type . "&country=" . $obj->country_name
-        . "&longitude=" . $obj->longitude . "&latitude=" . $obj->latitude);
+            . "&type=" . $obj->type . "&country=" . $obj->country_name
+            . "&longitude=" . $obj->longitude . "&latitude=" . $obj->latitude);
     }
 }

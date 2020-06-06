@@ -3,8 +3,9 @@
 namespace Anax\User\HTMLForm;
 
 use Anax\HTMLForm\FormModel;
-use Psr\Container\ContainerInterface;
 use Anax\User\User;
+use Psr\Container\ContainerInterface;
+
 /**
  * Example of FormModel implementation.
  */
@@ -19,53 +20,51 @@ class CreateUserForm extends FormModel
     {
         parent::__construct($di);
         $this->form->create(
-          [
-              "id" => __CLASS__,
-              "legend" => "Create user",
-          ],
-          [
-              "email" => [
-                  "type"        => "text",
-              ],
+            [
+                "id" => __CLASS__,
+                "legend" => "Create user",
+            ],
+            [
+                "email" => [
+                    "type" => "text",
+                ],
 
-              "password" => [
-                  "type"        => "password",
-              ],
+                "password" => [
+                    "type" => "password",
+                ],
 
-              "password-again" => [
-                  "type"        => "password",
-                  "validation" => [
-                      "match" => "password"
-                  ],
-              ],
+                "password-again" => [
+                    "type" => "password",
+                    "validation" => [
+                        "match" => "password",
+                    ],
+                ],
 
-              "submit" => [
-                  "type" => "submit",
-                  "value" => "Create user",
-                  "callback" => [$this, "callbackSubmit"]
-              ],
+                "submit" => [
+                    "type" => "submit",
+                    "value" => "Create user",
+                    "callback" => [$this, "callbackSubmit"],
+                ],
 
-          ]
+            ]
         );
     }
 
-
-
     /**
- * Callback for submit-button which should return true if it could
- * carry out its work and false if something failed.
- *
- * @return boolean true if okey, false if something went wrong.
- */
+     * Callback for submit-button which should return true if it could
+     * carry out its work and false if something failed.
+     *
+     * @return boolean true if okey, false if something went wrong.
+     */
     public function callbackSubmit()
     {
         // Get values from the submitted form
-        $email       = $this->form->value("email");
-        $password      = $this->form->value("password");
+        $email = $this->form->value("email");
+        $password = $this->form->value("password");
         $passwordAgain = $this->form->value("password-again");
 
         // Check password matches
-        if ($password !== $passwordAgain ) {
+        if ($password !== $passwordAgain) {
             $this->form->rememberValues();
             $this->form->addOutput("Password did not match.");
             return false;
@@ -81,8 +80,8 @@ class CreateUserForm extends FormModel
         $user = new User();
         $user->setDb($this->di->get("dbqb"));
         if ($user->hasMail($email)) {
-          $this->form->addOutput("Email already registered");
-          return false;
+            $this->form->addOutput("Email already registered");
+            return false;
         }
         $user->email = $email;
         $user->setPassword($password);

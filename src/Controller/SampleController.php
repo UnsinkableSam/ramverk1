@@ -22,14 +22,10 @@ class SampleController implements ContainerInjectableInterface
 {
     use ContainerInjectableTrait;
 
-
-
     /**
      * @var string $db a sample member variable that gets initialised
      */
     private $db = "not active";
-
-
 
     /**
      * The initialize method is optional and will always be called before the
@@ -38,13 +34,11 @@ class SampleController implements ContainerInjectableInterface
      *
      * @return void
      */
-    public function initialize() : void
+    public function initialize(): void
     {
         // Use to initialise member variables.
         $this->db = "active";
     }
-
-
 
     /**
      * This is the index method action, it handles:
@@ -54,13 +48,11 @@ class SampleController implements ContainerInjectableInterface
      *
      * @return string
      */
-    public function indexAction() : string
+    public function indexAction(): string
     {
         // Deal with the action and return a response.
         return __METHOD__ . ", \$db is {$this->db}";
     }
-
-
 
     /**
      * This sample method dumps the content of $di.
@@ -68,14 +60,12 @@ class SampleController implements ContainerInjectableInterface
      *
      * @return string
      */
-    public function dumpDiActionGet() : string
+    public function dumpDiActionGet(): string
     {
         // Deal with the action and return a response.
         $services = implode(", ", $this->di->getServices());
         return __METHOD__ . "<p>\$di contains: $services";
     }
-
-
 
     /**
      * Add the request method to the method name to limit what request methods
@@ -84,13 +74,11 @@ class SampleController implements ContainerInjectableInterface
      *
      * @return string
      */
-    public function infoActionGet() : string
+    public function infoActionGet(): string
     {
         // Deal with the action and return a response.
         return __METHOD__ . ", \$db is {$this->db}";
     }
-
-
 
     /**
      * This sample method action it the handler for route:
@@ -98,13 +86,11 @@ class SampleController implements ContainerInjectableInterface
      *
      * @return string
      */
-    public function createActionGet() : string
+    public function createActionGet(): string
     {
         // Deal with the action and return a response.
         return __METHOD__ . ", \$db is {$this->db}";
     }
-
-
 
     /**
      * This sample method action it the handler for route:
@@ -112,13 +98,11 @@ class SampleController implements ContainerInjectableInterface
      *
      * @return string
      */
-    public function createActionPost() : string
+    public function createActionPost(): string
     {
         // Deal with the action and return a response.
         return __METHOD__ . ", \$db is {$this->db}";
     }
-
-
 
     /**
      * This sample method action takes one argument:
@@ -128,13 +112,11 @@ class SampleController implements ContainerInjectableInterface
      *
      * @return string
      */
-    public function argumentActionGet($value) : string
+    public function argumentActionGet($value): string
     {
         // Deal with the action and return a response.
         return __METHOD__ . ", \$db is {$this->db}, got argument '$value'";
     }
-
-
 
     /**
      * This sample method action takes zero or one argument and you can use - as a separator which will then be removed:
@@ -147,13 +129,11 @@ class SampleController implements ContainerInjectableInterface
      *
      * @return string
      */
-    public function defaultArgumentActionGet($value = "default") : string
+    public function defaultArgumentActionGet($value = "default"): string
     {
         // Deal with the action and return a response.
         return __METHOD__ . ", \$db is {$this->db}, got argument '$value'";
     }
-
-
 
     /**
      * This sample method action takes two typed arguments:
@@ -168,13 +148,11 @@ class SampleController implements ContainerInjectableInterface
      *
      * @return string
      */
-    public function typedArgumentActionGet(string $str, int $int) : string
+    public function typedArgumentActionGet(string $str, int $int): string
     {
         // Deal with the action and return a response.
         return __METHOD__ . ", \$db is {$this->db}, got string argument '$str' and int argument '$int'.";
     }
-
-
 
     /**
      * This sample method action takes a variadic list of arguments:
@@ -188,13 +166,11 @@ class SampleController implements ContainerInjectableInterface
      *
      * @return string
      */
-    public function variadicActionGet(...$value) : string
+    public function variadicActionGet(...$value): string
     {
         // Deal with the action and return a response.
         return __METHOD__ . ", \$db is {$this->db}, got '" . count($value) . "' arguments: " . implode(", ", $value);
     }
-
-
 
     /**
      * Adding an optional catchAll() method will catch all actions sent to the

@@ -3,8 +3,8 @@
 namespace Anax\Questions\HTMLForm;
 
 use Anax\HTMLForm\FormModel;
-use Psr\Container\ContainerInterface;
 use Anax\Questions\Comments;
+use Psr\Container\ContainerInterface;
 
 /**
  * Form to create an item.
@@ -22,7 +22,7 @@ class CreateComment extends FormModel
         parent::__construct($di);
         $userName = $this->di->session->get("loggedin");
         $this->id = $id;
-        // $id = $this->di->session->get("id");
+
         // $answerId = $this->di->session->get("answerId");
         $this->form->create(
             [
@@ -53,13 +53,11 @@ class CreateComment extends FormModel
                 "submit" => [
                     "type" => "submit",
                     "value" => "Comment",
-                    "callback" => [$this, "callbackSubmit"]
+                    "callback" => [$this, "callbackSubmit"],
                 ],
             ]
         );
     }
-
-
 
     /**
      * Callback for submit-button which should return true if it could
@@ -67,7 +65,7 @@ class CreateComment extends FormModel
      *
      * @return bool true if okey, false if something went wrong.
      */
-    public function callbackSubmit() : bool
+    public function callbackSubmit(): bool
     {
         $comments = new Comments();
         $comments->setDb($this->di->get("dbqb"));
@@ -79,8 +77,6 @@ class CreateComment extends FormModel
         return true;
     }
 
-
-
     /**
      * Callback what to do if the form was successfully submitted, this
      * happen when the submit callback method returns true. This method
@@ -89,10 +85,8 @@ class CreateComment extends FormModel
     public function callbackSuccess()
     {
 
-        $this->di->get("response")->redirect("question/". $this->id)->send();
+        $this->di->get("response")->redirect("question/" . $this->id)->send();
     }
-
-
 
     // /**
     //  * Callback what to do if the form was unsuccessfully submitted, this

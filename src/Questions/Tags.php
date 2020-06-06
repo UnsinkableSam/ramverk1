@@ -4,7 +4,6 @@ namespace Anax\Questions;
 
 use Anax\DatabaseActiveRecord\ActiveRecordModel;
 
-
 /**
  * A database driven model using the Active Record design pattern.
  */
@@ -15,8 +14,6 @@ class Tags extends ActiveRecordModel
      */
     protected $tableName = "tags";
 
-
-
     /**
      * Columns in the table.
      *
@@ -25,7 +22,6 @@ class Tags extends ActiveRecordModel
     public $tags;
     public $threadId;
 
-
     public function getTags($di)
     {
 
@@ -33,7 +29,4 @@ class Tags extends ActiveRecordModel
         $res = $this->findAll();
         return $res;
     }
-
-
-
 }

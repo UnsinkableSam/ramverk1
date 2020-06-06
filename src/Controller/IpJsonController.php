@@ -2,7 +2,6 @@
 namespace Anax\Controller;
 
 use Anax\Commons\ContainerInjectableInterface;
-
 use Anax\Commons\ContainerInjectableTrait;
 
 // use Anax\Route\Exception\ForbiddenException;
@@ -21,45 +20,38 @@ class IpJsonController implements ContainerInjectableInterface
 
     use ContainerInjectableTrait;
 
-
-
     /**
      * @var string $db a sample member variable that gets initialised
      */
     // private $db = "not active";
 
-
-
-        /**
-         * This is the index method action, it handles:
-         * ANY METHOD mountpoint
-         * ANY METHOD mountpoint/
-         * ANY METHOD mountpoint/index
-         *
-         * @return string
-         */
-    public function indexAction() : object
+    /**
+     * This is the index method action, it handles:
+     * ANY METHOD mountpoint
+     * ANY METHOD mountpoint/
+     * ANY METHOD mountpoint/index
+     *
+     * @return string
+     */
+    public function indexAction(): object
     {
 
-          $title = " | Ip Json API";
-          $page = $this->di->get("page");
-          $page->add(
-              "anax/v2/ip-validator/ipApi",
-              [
-                  "header" => "hello",
-                  "text" => "text",
-              ]
-          );
-          return $page->render([
-              "title" => "$title"
-          ]);
+        $title = " | Ip Json API";
+        $page = $this->di->get("page");
+        $page->add(
+            "anax/v2/ip-validator/ipApi",
+            [
+                "header" => "hello",
+                "text" => "text",
+            ]
+        );
+        return $page->render([
+            "title" => "$title",
+        ]);
     }
 
-
-
-    public function validateipActionGet($ipAdress = null) : array
+    public function validateipActionGet($ipAdress = null): array
     {
-
 
         //
         // if ($this->di->get("request")->getGet("ip")) {
@@ -68,17 +60,14 @@ class IpJsonController implements ContainerInjectableInterface
         // } else {
         //     $ipInfo["IP"] = $ipAdress;
         // }
-          $ipInfo["IP"] = $this->di->get("request")->getPost("ip") ?? $ipAdress;
-          $bob =  $this->di->get("validateApi");
-          $res = $bob->validateipActionGet($ipInfo["IP"]);
+        $ipInfo["IP"] = $this->di->get("request")->getPost("ip") ?? $ipAdress;
+        $bob = $this->di->get("validateApi");
+        $res = $bob->validateipActionGet($ipInfo["IP"]);
 
         return $res;
     }
 
-
-
-
-    public function validateipActionPost($ipAdress = null) : array
+    public function validateipActionPost($ipAdress = null): array
     {
 
         // if ($this->di->get("request")->getPost("ip")) {
@@ -88,7 +77,7 @@ class IpJsonController implements ContainerInjectableInterface
         //     $ipInfo["IP"] = $ipAdress;
         // }
         $ipInfo["IP"] = $this->di->get("request")->getPost("ip") ?? $ipAdress;
-        $bob =  $this->di->get("validateApi");
+        $bob = $this->di->get("validateApi");
         $res = $bob->validateipActionGet($ipInfo["IP"]);
 
         return $res;
