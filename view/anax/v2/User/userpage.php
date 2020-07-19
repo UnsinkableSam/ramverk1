@@ -1,12 +1,27 @@
 <?php if ($res) :?>
     <?php print_r("<h1>" . $res[0]->email . "</h1>" ?? "<br><h3> No logged in </h3>");
 
-
     ?>
+
+
+
 
   <img src="<?php echo $avatar ?>" alt="Avatar">
   <br>
 
+<?php 
+if ($currentUser == $res[0]->email) {
+   
+  ?>
+  <h1>Update Profile</h1>
+
+
+<textarea name=""  id="" cols="30" rows="10" readonly> <?= $res[0]->bioText ?></textarea>
+<form action="../user/bio" id="bioForm">
+  <input type="submit" value="Update">
+</form>
+
+<?php } ?>
     
 <?php endif ?>
 

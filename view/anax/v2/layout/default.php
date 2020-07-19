@@ -1,6 +1,7 @@
 <?php
-header('Content-Type: application/json');
 namespace Anax\View;
+header('Content-Type: application/json');
+
 
 /**
  * A layout rendering views in defined regions.
@@ -13,6 +14,7 @@ $title = ($title ?? "No title") . ($baseTitle ?? " | No base title defined");
 
 ?><!doctype html>
 <html>
+
 <head>
     <meta charset="utf-8">
     <title><?= $title ?></title>

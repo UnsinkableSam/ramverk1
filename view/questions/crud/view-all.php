@@ -14,7 +14,7 @@ $items = isset($items) ? $items : null;
 
 // Create urls for navigation
 $urlToCreate = url("create");
-$urlToDelete = url("delete");
+
 
 
 
@@ -22,8 +22,8 @@ $urlToDelete = url("delete");
 <h1>View all items</h1>
 
 <p>
-    <a href="<?= $urlToCreate ?>">Create</a> |
-    <a href="<?= $urlToDelete ?>">Delete</a>
+    <a href="<?= $urlToCreate ?>">Create</a> 
+
 </p>
 
 <?php if (!$items) : ?>

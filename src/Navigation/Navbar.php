@@ -140,7 +140,20 @@ class Navbar
                 // Add the menu item
                 // $url = $menu["create_url"]($item["url"]);
                 $url = $this->url($item["url"]);
-                $html .= "\n<li{$class}>{$subMenuButton}<a href='{$url}' title='{$item['title']}'>{$item['text']}</a>{$subMenu}</li>\n";
+                if ($this->di->session->get("loggedin") !== null) {
+
+                    if ( $item["title"] !== "register" && $item["title"] !== "login"  )  {
+                        $html .= "\n<li{$class}>{$subMenuButton}<a href='{$url}' title='{$item['title']}'>{$item['text']}</a>{$subMenu}</li>\n";
+                    }
+                }  
+                 
+                if ($this->di->session->get("loggedin") === null) {
+                    if ( $item["title"] !== "logout" ) {
+                        $html .= "\n<li{$class}>{$subMenuButton}<a href='{$url}' title='{$item['title']}'>{$item['text']}</a>{$subMenu}</li>\n";
+                    } 
+                 }
+                
+                
 
                 // To remember there is selected children when going up the menu hierarchy
                 if ($selected) {

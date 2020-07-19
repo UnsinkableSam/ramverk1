@@ -16,5 +16,6 @@ CREATE TABLE User (
     "updated" DATETIME,
     "deleted" DATETIME,
     "active" DATETIME,
-    "points" INTEGER
+    "points" INTEGER,
+    "bioText" TEXT
 );

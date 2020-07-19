@@ -36,10 +36,11 @@ $filteredQAuthor = $filter->parse("Author:" . "<a href='$userUrl'>" . $question[
 
 // $filteredQAuthor = $filter->parse("Author: " . $question[0]->author, $filters);
 $filteredQTitle = $filter->parse("Title: " . $question[0]->title, $filters);
+$filteredQText = $filter->parse($question[0]->text, $filters);
 print_r("<h2> " . $filteredQAuthor->text . "</h2>");
 ?>
-        <h3> <?php print_r($filteredQTitle->text);?> </h3>
-        <?php print_r($question[0]->text);?>
+        <?php echo $filteredQTitle->text;?>
+        <?php echo $filteredQText->text;?>
         <?php
 $valueId = $question[0]->id;
 ?>

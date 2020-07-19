@@ -8,6 +8,7 @@ use Anax\Questions\Answer;
 use Anax\Questions\Comments;
 use Anax\Questions\Questions;
 use Anax\User\HTMLForm\CreateUserForm;
+use Anax\User\HTMLForm\UpdateUserForm;
 use Anax\User\HTMLForm\UserLoginForm;
 use Anax\User\HTMLForm\UserPage;
 use Anax\User\User;
@@ -129,6 +130,23 @@ class UserController implements ContainerInjectableInterface
         ]);
     }
 
+
+
+    public function bioAction(): object
+    {
+        $page = $this->di->get("page");
+        $form = new UpdateUserForm($this->di);
+        $form->check();
+
+        $page->add("anax/v2/article/default", [
+            "content" => $form->getHTML(),
+        ]);
+
+        return $page->render([
+            "title" => "A create user page",
+        ]);
+    }
+
     public function userAction($email = null): object
     {
 
@@ -136,6 +154,7 @@ class UserController implements ContainerInjectableInterface
         $userPage = new UserPage($this->di);
         $userPage->check();
         $res = $userPage->userInfo();
+        $currentUser = $this->di->session->get("loggedin");
         if ($email !== null) {
             $res[0]->email = $email;
         }
@@ -177,6 +196,7 @@ class UserController implements ContainerInjectableInterface
                 "comments" => $userComments,
                 "answeresOfQuestion" => $answeresOfQuestion,
                 "answers" => $userAnswers,
+                "currentUser" => $currentUser,
 
             ]);
         }

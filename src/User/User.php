@@ -33,6 +33,7 @@ class User extends ActiveRecordModel implements ContainerInjectableInterface
     public $deleted;
     public $active;
     public $points;
+    public $bioText;
 
     /**
      * Set the password.
@@ -60,6 +61,10 @@ class User extends ActiveRecordModel implements ContainerInjectableInterface
         return password_verify($password, $this->password);
     }
 
+
+
+
+
     // public function save() {
     //   // $this->password = password_hash($this->password, PASSWORD_DEFAULT);
     //     $this->db->connect()
@@ -78,16 +83,37 @@ class User extends ActiveRecordModel implements ContainerInjectableInterface
         return false;
     }
 
-    public function updateUser($pass)
+    public function updateUser($currentEmail)
     {
         // $this->password = password_hash($this->password, PASSWORD_DEFAULT);
-
+         $this->setPassword($this->password);
+        $password = $this->password; 
+        $email = $this->email;
+        $bioText = $this->bioText;
         // Not working as intended.
-        $this->setPassword($pass);
+        $this->db->connect();
+        $this->find("email", $currentEmail);
+
+        $this->bioText = $bioText;
+        $this->email = $email;
+        $this->password = $password;
+       
+       // $this->update_attributes(array('password' => $this->password, 'id' => $this->id));
+        
+        $this->save();
+        
+    }
+
+
+        public function setBio()
+    {
+        // $this->password = password_hash($this->password, PASSWORD_DEFAULT);
+        // Not working as intended.
         $this->db->connect()
-            ->update("User", ["password"])
-            ->execute([$this->password])
+            ->update("User", ["bioText"])
+            ->execute([$this->bioText])
             ->fetch();
+        
     }
 
     public function totalPoints($email, $di)

@@ -29,7 +29,7 @@ $currentUrl = currentUrl();
     <h4><?= $title ?></h4>
     
     <ul class="toc">
-
+    
         <?php
         foreach ($toc as $route => $item) {
             $text = $item["title"];

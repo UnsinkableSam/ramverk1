@@ -13,6 +13,8 @@ for ($i=0; $i < count($tags); $i++) {
 }
 
 
+
+
 $array = array_count_values($tagsArr);
 
 

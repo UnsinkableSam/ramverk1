@@ -9,30 +9,34 @@ use Psr\Container\ContainerInterface;
 /**
  * Example of FormModel implementation.
  */
-class UserPage extends FormModel
+class UpdateUserForm extends FormModel
 {
-
     /**
      * Constructor injects with DI container.
      *
      * @param Psr\Container\ContainerInterface $di a service container
      */
-
     public function __construct(ContainerInterface $di)
     {
         parent::__construct($di);
-        $userName = $this->di->session->get("loggedin") ?? "";
         $this->form->create(
             [
                 "id" => __CLASS__,
-                "legend" => "Update user",
+                "legend" => "Create user",
             ],
             [
-                "email" => [
+                 "Currentemail" => [
                     "type" => "hidden",
-                    "value" => "$userName",
+                    "value" =>  $userName = $this->di->session->get("loggedin"),
                 ],
-                
+
+                "email" => [
+                    "type" => "text",
+                ],
+
+                 "presentation" => [
+                    "type" => "textarea",
+                ],
 
                 "password" => [
                     "type" => "password",
@@ -55,49 +59,20 @@ class UserPage extends FormModel
         );
     }
 
-    public function get_gravatar($email, $s = 80, $d = 'mp', $r = 'g', $img = false, $atts = array())
-    {
-        $url = 'https://www.gravatar.com/avatar/';
-        $url .= md5(strtolower(trim($email)));
-        $url .= "?s=$s&d=$d&r=$r";
-        if ($img) {
-            $url = '<img src="' . $url . '"';
-            foreach ($atts as $key => $val) {
-                $url .= ' ' . $key . '="' . $val . '"';
-            }
-
-            $url .= ' />';
-        }
-        return $url;
-    }
-
     /**
      * Callback for submit-button which should return true if it could
      * carry out its work and false if something failed.
      *
      * @return boolean true if okey, false if something went wrong.
      */
-    public function userInfo()
-    {
-        $user = new User();
-        $user->setDb($this->di->get("dbqb"));
-        $idUser = $this->di->session->get("loggedin") ?? "";
-        $res = $user->findAllWhere("email = ?", $idUser);
-
-        // if (!$res) {
-        //    $res = "Not logged in as a user";
-        // }
-        return $res;
-    }
-
     public function callbackSubmit()
     {
-
         // Get values from the submitted form
+        $currentEmail = $this->form->value("Currentemail");
         $email = $this->form->value("email");
         $password = $this->form->value("password");
         $passwordAgain = $this->form->value("password-again");
-
+        $bio = $this->form->value("presentation");
         // Check password matches
         if ($password !== $passwordAgain) {
             $this->form->rememberValues();
@@ -105,14 +80,23 @@ class UserPage extends FormModel
             return false;
         }
 
+        // Save to database
+        // $db = $this->di->get("dbqb");
+        // $password = password_hash($password, PASSWORD_DEFAULT);
+        // $db->connect()
+        //    ->insert("User", ["acronym", "password"])
+        //    ->execute([$acronym])
+        //    ->fetch();
+
         $user = new User();
         $user->setDb($this->di->get("dbqb"));
         $user->email = $email;
-        $user->setPassword($password);
-        // $res = $user->findAllWhere("email = ?", $email);
-        $user->updateUser($password);
-
-        $this->form->addOutput("User was updated");
+        $user->password = $password;
+        $user->bioText = $bio;
+        $user->updateUser($currentEmail);
+        //$user->save();
+        $this->di->session->set("loggedin", $email);
+        $this->form->addOutput("User was Updated.");
         return true;
     }
 }

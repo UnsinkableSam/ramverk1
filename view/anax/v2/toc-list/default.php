@@ -22,7 +22,6 @@ namespace Anax\View;
             ? " title=\"${link["title"]}\""
             : null; */
         ?>
-
     <li><a href="<?= $url ?>"<?= $title ?>><?= $text ?></a></li>
 
     <?php endforeach; ?>

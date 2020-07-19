@@ -16,7 +16,23 @@ $classes = "navbar " . ($navbarConfig["class"] ?? null);
 
 
 ?><navbar <?= classList($classes) ?>>
-<?php foreach ($items as $item) : ?>
-    <a href="<?= url($item["url"]) ?>" title="<?= $item["title"] ?>"><?= $item["text"] ?></a>
+<?php foreach ($items as $item) : 
+if ($this->di->session->get("loggedin") !== null ) { ?>
+    
+    <?php if ($item["title"] === "logout") { ?>
+        <a href="<?= url($item["url"]) ?>" title="<?= $item["title"] ?>"><?= $item["text"] ?></a>
+    <?php } ?>
+<?php } else {
+
+      if ($item["title"] === "Login" && $item["title"] === "Register") { ?>
+        <a href="<?= url($item["url"]) ?>" title="<?= $item["title"] ?>"><?= $item["text"] ?></a>
+    <?php } 
+
+}
+
+?>
+
+
+    
 <?php endforeach; ?>
 </navbar>

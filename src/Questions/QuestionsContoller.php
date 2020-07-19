@@ -156,25 +156,7 @@ class QuestionsContoller implements ContainerInjectableInterface
         ]);
     }
 
-    /**
-     * Handler with form to delete an item.
-     *
-     * @return object as a response object
-     */
-    public function deleteAction(): object
-    {
-        $page = $this->di->get("page");
-        $form = new DeleteForm($this->di);
-        $form->check();
 
-        $page->add("questions/crud/delete", [
-            "form" => $form->getHTML(),
-        ]);
-
-        return $page->render([
-            "title" => "Delete an item",
-        ]);
-    }
 
     /**
      * Handler with form to update an item.
