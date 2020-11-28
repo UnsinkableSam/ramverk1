@@ -12,7 +12,6 @@
   "require-dev": {
     "phpunit/phpunit": "^7",
     "anax/htmlform": "^2.0",
-    "php-cs-fixer.executablePath": "tools/php-cs-fixer/vendor/bin/php-cs-fixer",
     "anax/database-active-record": "^2.0"
   },
   "require": {
