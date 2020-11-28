@@ -10,6 +10,7 @@ use \Anax\TextFilter\TextFilter;
 
 /**
  * Form to create an item.
+ * @SuppressWarnings(PHPMD)
  */
 class CreateForm extends FormModel
 {

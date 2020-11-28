@@ -55,7 +55,7 @@ class UserPage extends FormModel
         );
     }
 
-    public function getGravatar($email, $s = 80, $d = 'mp', $r = 'g', $img = false, $atts = array())
+    public function getravatar($email, $s = 80, $d = 'mp', $r = 'g', $img = false, $atts = array())
     {
         $url = 'https://www.gravatar.com/avatar/';
         $url .= md5(strtolower(trim($email)));

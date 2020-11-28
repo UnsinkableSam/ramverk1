@@ -8,6 +8,7 @@ use Psr\Container\ContainerInterface;
 
 /**
  * Example of FormModel implementation.
+ * @SuppressWarnings(PHPMD)
  */
 class UpdateUserForm extends FormModel
 {
