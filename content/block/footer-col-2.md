@@ -1,3 +1,3 @@
-#### Footer col 2
+#### Linkedin
 
-Med brödtext i ett stycke som säger något trevligt om just detta block, eller kanske en lista av länkar.
+[<img src="img/linkedin-icon-25.png" width="100px">](https://www.linkedin.com/in/sam-pettersson-933505181/)

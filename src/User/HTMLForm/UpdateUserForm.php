@@ -28,32 +28,32 @@ class UpdateUserForm extends FormModel
                  "Currentemail" => [
                     "type" => "hidden",
                     "value" =>  $userName = $this->di->session->get("loggedin"),
-                ],
+                 ],
 
-                "email" => [
+                 "email" => [
                     "type" => "text",
-                ],
+                 ],
 
                  "presentation" => [
                     "type" => "textarea",
-                ],
+                 ],
 
-                "password" => [
+                 "password" => [
                     "type" => "password",
-                ],
+                 ],
 
-                "password-again" => [
+                 "password-again" => [
                     "type" => "password",
                     "validation" => [
                         "match" => "password",
-                    ],
-                ],
+                     ],
+                 ],
 
-                "submit" => [
+                 "submit" => [
                     "type" => "submit",
                     "value" => "Update user",
                     "callback" => [$this, "callbackSubmit"],
-                ],
+                 ],
 
             ]
         );

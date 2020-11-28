@@ -86,8 +86,8 @@ class User extends ActiveRecordModel implements ContainerInjectableInterface
     public function updateUser($currentEmail)
     {
         // $this->password = password_hash($this->password, PASSWORD_DEFAULT);
-         $this->setPassword($this->password);
-        $password = $this->password; 
+        $this->setPassword($this->password);
+        $password = $this->password;
         $email = $this->email;
         $bioText = $this->bioText;
         // Not working as intended.
@@ -98,14 +98,13 @@ class User extends ActiveRecordModel implements ContainerInjectableInterface
         $this->email = $email;
         $this->password = $password;
        
-       // $this->update_attributes(array('password' => $this->password, 'id' => $this->id));
+        // $this->update_attributes(array('password' => $this->password, 'id' => $this->id));
         
         $this->save();
-        
     }
 
 
-        public function setBio()
+    public function setBio()
     {
         // $this->password = password_hash($this->password, PASSWORD_DEFAULT);
         // Not working as intended.
@@ -113,12 +112,10 @@ class User extends ActiveRecordModel implements ContainerInjectableInterface
             ->update("User", ["bioText"])
             ->execute([$this->bioText])
             ->fetch();
-        
     }
 
     public function totalPoints($email, $di)
     {
-
         $answers = new Answer();
         $comments = new Comments();
         $questions = new Questions();
@@ -177,5 +174,23 @@ class User extends ActiveRecordModel implements ContainerInjectableInterface
             return "Answered";
         }
         return "No answer";
+    }
+
+
+    public function activity($email, $di)
+    {
+        $answer = new Answer();
+        $answer->setDb($di->get("dbqb"));
+        $answer->db->connect();
+
+        $comment = new Comments();
+        $comment->setDb($di->get("dbqb"));
+        $comment->db->connect();
+
+        $commentCount = $comment->findAllWhere("author = ?", $email);
+        $answersCount = $answer->findAllWhere("author = ?", $email);
+
+
+        return $commentCount + $answersCount;
     }
 }

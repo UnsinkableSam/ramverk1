@@ -26,7 +26,6 @@ class Answer extends ActiveRecordModel
 
     public function userInfo($id = null, $di = null)
     {
-
         $this->setDb($di->get("dbqb"));
         $res = $this->findAllWhere("id = ?", $id);
         return $res;
@@ -34,7 +33,6 @@ class Answer extends ActiveRecordModel
 
     public function questionAnswers($id = null, $di = null)
     {
-
         $this->setDb($di->get("dbqb"));
         $res = $this->findAllWhere("questionID = ?", $id);
 
@@ -50,7 +48,6 @@ class Answer extends ActiveRecordModel
 
     public function userAnswers($username = null, $di = null)
     {
-
         $this->setDb($di->get("dbqb"));
         $res = $this->findAllWhere("author = ?", $username);
 

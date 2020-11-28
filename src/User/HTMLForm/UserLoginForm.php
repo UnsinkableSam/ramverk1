@@ -57,7 +57,6 @@ class UserLoginForm extends FormModel
    */
     public function callbackSubmit()
     {
-
         $email       = $this->form->value("user");
         $password      = $this->form->value("password");
 

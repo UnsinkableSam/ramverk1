@@ -149,7 +149,6 @@ class UserController implements ContainerInjectableInterface
 
     public function userAction($email = null): object
     {
-
         $page = $this->di->get("page");
         $userPage = new UserPage($this->di);
         $userPage->check();
@@ -159,7 +158,7 @@ class UserController implements ContainerInjectableInterface
             $res[0]->email = $email;
         }
         if ($res) {
-            $avatar = $userPage->get_gravatar($res[0]->email);
+            $avatar = $userPage->getGravatar($res[0]->email);
             $user = new User($this->di);
             $questions = new Questions($this->di);
             $comments = new Comments($this->di);

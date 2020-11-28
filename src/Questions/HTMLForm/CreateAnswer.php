@@ -64,7 +64,6 @@ class CreateAnswer extends FormModel
      */
     public function callbackSubmit(): bool
     {
-
         $answer = new Answer();
         $this->di->session->set("answerId", $answer->id);
         $answer->setDb($this->di->get("dbqb"));

@@ -10,6 +10,7 @@ use Anax\Questions\HTMLForm\CreateForm;
 use Anax\Questions\HTMLForm\DeleteForm;
 use Anax\Questions\HTMLForm\UpdateForm;
 use Anax\Questions\Tags;
+use Anax\User\User;
 
 // use Anax\Questions\HTMLForm\Test;
 // use Anax\Route\Exception\ForbiddenException;
@@ -32,11 +33,9 @@ class QuestionsContoller implements ContainerInjectableInterface
     {
         // Get the current route and see if it matches a content/file
 
-        //   $file1 = ANAX_INSTALL_PATH . "/content/{$path}.md";
-        //   $file2 = ANAX_INSTALL_PATH . "/content/{$path}/index.md";
-
-        //   $file = is_file($file1) ? $file1 : null;
-        //   $file = is_file($file2) ? $file2 : $file;
+        $user = new User();
+        $user->setDb($this->di->get("dbqb"));
+        $allUsers = $user->findAll();
 
         $questions = new Questions();
         $questions->setDb($this->di->get("dbqb"));
@@ -71,6 +70,7 @@ class QuestionsContoller implements ContainerInjectableInterface
             "frontmatter" => $content->frontmatter,
             "questions" => $questions->indexFind(null, $this->di),
             "tags" => $tags,
+            "users" => $allUsers
         ]);
 
         return $page->render($content->frontmatter);

@@ -17,7 +17,6 @@ use Anax\Commons\ContainerInjectableTrait;
  */
 class RestApiExternalController implements ContainerInjectableInterface
 {
-
     use ContainerInjectableTrait;
 
     /**

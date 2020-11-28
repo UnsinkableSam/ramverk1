@@ -91,7 +91,6 @@ class Navbar
         ) use (
             &$createMenu
         ) {
-
             $html = null;
             $hasItemIsSelected = false;
 
@@ -141,17 +140,16 @@ class Navbar
                 // $url = $menu["create_url"]($item["url"]);
                 $url = $this->url($item["url"]);
                 if ($this->di->session->get("loggedin") !== null) {
-
-                    if ( $item["title"] !== "register" && $item["title"] !== "login"  )  {
+                    if ($item["title"] !== "register" && $item["title"] !== "login") {
                         $html .= "\n<li{$class}>{$subMenuButton}<a href='{$url}' title='{$item['title']}'>{$item['text']}</a>{$subMenu}</li>\n";
                     }
-                }  
+                }
                  
                 if ($this->di->session->get("loggedin") === null) {
-                    if ( $item["title"] !== "logout" ) {
+                    if ($item["title"] !== "logout") {
                         $html .= "\n<li{$class}>{$subMenuButton}<a href='{$url}' title='{$item['title']}'>{$item['text']}</a>{$subMenu}</li>\n";
-                    } 
-                 }
+                    }
+                }
                 
                 
 

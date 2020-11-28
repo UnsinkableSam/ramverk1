@@ -9,10 +9,9 @@
   <img src="<?php echo $avatar ?>" alt="Avatar">
   <br>
 
-<?php 
-if ($currentUser == $res[0]->email) {
-   
-  ?>
+    <?php
+    if ($currentUser == $res[0]->email) {
+        ?>
   <h1>Update Profile</h1>
 
 
@@ -21,7 +20,8 @@ if ($currentUser == $res[0]->email) {
   <input type="submit" value="Update">
 </form>
 
-<?php } ?>
+        <?php
+    } ?>
     
 <?php endif ?>
 

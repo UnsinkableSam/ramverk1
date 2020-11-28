@@ -53,7 +53,6 @@ class Questions extends ActiveRecordModel
 
     public function userInfo($id = null, $di = null)
     {
-
         $this->setDb($di->get("dbqb"));
         $res = $this->findAllWhere("id = ?", $id);
         return $res;

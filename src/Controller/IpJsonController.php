@@ -17,7 +17,6 @@ use Anax\Commons\ContainerInjectableTrait;
  */
 class IpJsonController implements ContainerInjectableInterface
 {
-
     use ContainerInjectableTrait;
 
     /**
@@ -35,7 +34,6 @@ class IpJsonController implements ContainerInjectableInterface
      */
     public function indexAction(): object
     {
-
         $title = " | Ip Json API";
         $page = $this->di->get("page");
         $page->add(

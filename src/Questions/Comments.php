@@ -26,7 +26,6 @@ class Comments extends ActiveRecordModel
 
     public function userInfo($di = null)
     {
-
         $this->setDb($di->get("dbqb"));
         $res = $this->findAll();
 
@@ -38,7 +37,6 @@ class Comments extends ActiveRecordModel
 
     public function points($id = null, $di = null)
     {
-
         $this->setDb($di->get("dbqb"));
         $res = $this->findAllWhere("id = ?", $id);
         $this->points += 1;
@@ -50,7 +48,6 @@ class Comments extends ActiveRecordModel
 
     public function questionComments($id = null, $di = null)
     {
-
         $this->setDb($di->get("dbqb"));
         $res = $this->findAllWhere("threadId = ?", $id);
 
@@ -62,7 +59,6 @@ class Comments extends ActiveRecordModel
 
     public function answerComments($di = null)
     {
-
         $this->setDb($di->get("dbqb"));
         $res = $this->findAllWhere("answerId = ? threadId = ?", "13 1");
 
@@ -74,7 +70,6 @@ class Comments extends ActiveRecordModel
 
     public function userComments($username = null, $di = null)
     {
-
         $this->setDb($di->get("dbqb"));
         $res = $this->findAllWhere("author = ?", $username);
 

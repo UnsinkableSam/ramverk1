@@ -79,10 +79,10 @@ class CreateUserForm extends FormModel
         //    ->fetch();
         $user = new User();
         $user->setDb($this->di->get("dbqb"));
-        if ($user->hasMail($email)) {
-            $this->form->addOutput("Email already registered");
-            return false;
-        }
+        /*    if ($user->hasMail($email)) {
+               $this->form->addOutput("Email already registered");
+               return false;
+           } */
         $user->email = $email;
         $user->setPassword($password);
         $user->save();

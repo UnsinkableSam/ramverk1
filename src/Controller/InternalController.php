@@ -17,7 +17,6 @@ use Anax\Commons\ContainerInjectableTrait;
  */
 class InternalController implements ContainerInjectableInterface
 {
-
     use ContainerInjectableTrait;
 
     /**
@@ -59,7 +58,6 @@ class InternalController implements ContainerInjectableInterface
 
     public function ipinfoAction(): object
     {
-
         $title = " | Ip info";
         $page = $this->di->get("page");
         $page->add("anax/v2/ip-validator/ipinfo", [

@@ -44,9 +44,7 @@ $currentUrl = currentUrl();
 
             if (strcmp(url($route), $currentUrl) === 0) {
                 $class .= " selected";
-            }
-            
-            ?><li class="<?= $class ?>"><?= $text ?></li><?php
+            } ?><li class="<?= $class ?>"><?= $text ?></li><?php
         } ?>
 
     </ul>

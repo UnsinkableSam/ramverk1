@@ -84,7 +84,6 @@ class CreateComment extends FormModel
      */
     public function callbackSuccess()
     {
-
         $this->di->get("response")->redirect("question/" . $this->id)->send();
     }
 

@@ -24,7 +24,6 @@ class Tags extends ActiveRecordModel
 
     public function getTags($di)
     {
-
         $this->setDb($di->get("dbqb"));
         $res = $this->findAll();
         return $res;

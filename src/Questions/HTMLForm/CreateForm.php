@@ -29,6 +29,10 @@ class CreateForm extends FormModel
         // $filters = ["shortcode", "markdown", "clickable", "bbcode"];
         parent::__construct($di);
         $userName = $this->di->session->get("loggedin");
+
+        if ($userName = $this->di->session->get("loggedin") == null) {
+            $this->di->get("response")->redirect("user/login");
+        }
         $this->form->create(
             [
                 "id" => __CLASS__,
@@ -53,6 +57,7 @@ class CreateForm extends FormModel
 
                 "tags" => [
                     "type" => "text",
+                    "value" => "tag1 tag2 tag3",
                     "validation" => ["not_empty"],
                 ],
 
@@ -75,7 +80,6 @@ class CreateForm extends FormModel
         // $filter = new TextFilter();
         // $filters = ["shortcode", "markdown", "clickable", "bbcode"];
         $questions = new Questions();
-        echo "hello";
         $this->form->addOutput($this->di->get("response"));
         $questions->setDb($this->di->get("dbqb"));
 
@@ -125,7 +129,6 @@ class CreateForm extends FormModel
 
     public function testPrint()
     {
-
         $filter = new TextFilter();
         $filters = ["shortcode", "markdown", "clickable", "bbcode"];
         print_r($this->form->value("title"));

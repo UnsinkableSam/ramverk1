@@ -1,5 +1,6 @@
 <?php
 namespace Anax\View;
+
 header('Content-Type: application/json');
 
 

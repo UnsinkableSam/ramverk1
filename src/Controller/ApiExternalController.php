@@ -17,7 +17,6 @@ use Anax\Commons\ContainerInjectableTrait;
  */
 class ApiExternalController implements ContainerInjectableInterface
 {
-
     use ContainerInjectableTrait;
 
     /**
@@ -52,7 +51,6 @@ class ApiExternalController implements ContainerInjectableInterface
 
     public function externalInfoAction(): object
     {
-
         $title = " | Ip info";
         $page = $this->di->get("page");
         $page->add("anax/v2/ip-validator/externalInfo", [
