@@ -17,6 +17,7 @@
   "require": {
     "anax/anax-ramverk1-me": "^1.0.0",
     "samax/stackoverflow-mod": "^v1.6.9",
-    "danak/anaxmodule": "^v3.0.2"
+    "danak/anaxmodule": "^v3.0.2",
+    "phploc/phploc": "7.0.0"
   }
 }
