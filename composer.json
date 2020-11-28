@@ -18,6 +18,6 @@
     "anax/anax-ramverk1-me": "^1.0.0",
     "samax/stackoverflow-mod": "^v1.6.9",
     "danak/anaxmodule": "^v3.0.2",
-    "phploc/phploc": "^5.0"
+    "phpunit/phpunit": "^7.0"
   }
 }
